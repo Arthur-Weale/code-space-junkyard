@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fetch starting point</title>
+
+    <style>
+    html,
+    pre {
+        font-family: sans-serif;
+    }
+
+    body {
+        width: 500px;
+        margin: 0 auto;
+        background-color: #ccc;
+    }
+
+    pre {
+        line-height: 1.5;
+        letter-spacing: 0.05rem;
+        padding: 1rem;
+        background-color: white;
+    }
+
+    label {
+        width: 200px;
+        margin-right: 33px;
+    }
+
+    select {
+        width: 350px;
+        padding: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Fetch starting point</h1>
+
+    <form>
+    <label for="verse-choose">Choose a Pokemon</label>
+    <select id="verse-choose" name="verse-choose">
+        <!-- <option>Verse 1</option>
+        <option>Verse 2</option>
+        <option>Verse 3</option>
+        <option>Verse 4</option> -->
+    </select>
+    </form>
+
+    <!-- <h2>The Conqueror Worm, <em>Edgar Allen Poe, 1843</em></h2> -->
+
+    <pre></pre>
+
+    <script>
+        const verseChoose = document.querySelector("select");
+        const poemDisplay = document.querySelector("pre");
+
+        const url = `https://pokeapi.co/api/v2/pokemon`
+
+        fetch(url)
+            .then((response)=>{
+                if(!response.ok){
+                    throw new Error(`Http error ${response.status}`);
+                }
+                return response.json(); //Data stream is converted to readable json
+            })
+            .then((response)=>{ //Response handler with json return
+                console.log(`What is the total count value for Pokemon characters? ${response.count}`)
+                const url = response.next //Sets url .next is a key in an object 
+                const urlParams = new URLSearchParams(url); //Run new instance on url search params and set the url as the argument
+                const result = urlParams.get("limit") //Access "limit" in the url query string
+                console.log(url);
+                console.log(`What number of Pokemon character records returned by default? ${result}`)
+                console.log(JSON.stringify(response, null, 3)) //Format json
+
+                const pokemon = response.results //Store the array with key "results"
+                pokemon.forEach((poke)=> {
+                    console.log(poke.name); //Outputs Pokemon names : Works
+                    const textNode = document.createTextNode(poke.name) //Set the name of the option in textNode
+                    const node = document.createElement("option"); //Create element , the option tag
+                    node.appendChild(textNode) //= poke.name //append the text to the option tag
+                    verseChoose.appendChild(node); //Append the option to a select element
+                })
+
+            })
+            .catch((err)=>{
+                console.log(`Response failed ${err.message}`)
+            })
+
+
+    </script>
+</body>
+</html>
