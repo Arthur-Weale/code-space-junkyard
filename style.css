@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.countdown{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr 1fr;
+    border: 5px solid blueviolet;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    justify-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin: 0;
+}
+
+button{
+    padding: 5px 15px;
+    border: 2px solid blueviolet;
+    background-color: blueviolet;
+    border-radius: 5px;
+    color: azure;
+}
+
+h1{
+    grid-column: 1/ span 2;
+}
+
+#startButton{
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+#stopButton{
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
