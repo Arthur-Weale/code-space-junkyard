@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Car = function(brand){
+            this.name = brand;
+            this.speed = 0
+        }
+
+        Car.prototype.drive = function(){
+            this.speed += 24;
+            console.log(`This ${this.name} is in cruising at ${this.speed}` )
+        }
+
+        const car1= new Car('Toyota')
+        const car2= new Car('Bmw')
+
+        car1.drive()
+        car2.drive()
+    </script>
+</body>
+</html>
